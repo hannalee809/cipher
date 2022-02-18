@@ -55,10 +55,9 @@ def encipher(messagef,padf):
             used += 1
         else:
             finalMessage.append(i)
-            used += 1
+            used = used
     print("".join(finalMessage))
         
-
 def decipher(messagef, padf):
     f = open(padf)
     pad = f.read()
@@ -74,11 +73,11 @@ def decipher(messagef, padf):
             used += 1
         else:
             finalMessage.append(i)
-            used += 1
+            used = used
     print("".join(finalMessage))
 
-decipher(messagef = "HELLO WORLD", padf = "AAAAAAAAAAA")
-#decipher(messagef = input("Message: "), padf = input("Pad: "))
+
+decipher(messagef = input("Message: "), padf = input("Pad: "))
 
         
 
