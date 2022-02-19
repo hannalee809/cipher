@@ -2,9 +2,11 @@ import random
 import string
 
 # generatePad function 
-def generatePad(pad_length):
+def generatePad(file_name, pad_length):
     letters = string.ascii_uppercase
-    print(''.join(random.choice(letters) for i in range(int(pad_length))))
+    f = open(file_name, "x")
+    f.write(''.join(random.choice(letters) for i in range(int(pad_length))))
+    f.close()
 
     # put into a file
 
@@ -86,11 +88,13 @@ def decipher(messagef, padf):
     print("".join(finalMessage))
 
 def main(): 
-    choice = input("Would you like to encipher or decipher the code?: ")
+    choice = input("Would you like to encipher or decipher the code, or generate a pad file?: ")
     if choice == "Encipher" or choice == "encipher":
         encipher(messagef = input("Message: "), padf = input("Pad: "))
     elif choice == "Decipher" or choice == "decipher":
         decipher(messagef = input("Message: "), padf = input("Pad: "))
+    elif choice == "Generate pad file":
+        generatePad(file_name = input("File name: "), pad_length = input("Pad length: "))
     else: print("Invalid response. Please try again.")
 
 if __name__ == "__main__":
