@@ -41,18 +41,23 @@ def shiftMessage(message,pad):
         
 
 def encipher(messagef,padf):
+    # opens and reads the files of pad and message
     f = open(padf)
     pad = f.read()
     m = open(messagef)
     message = m.read()
+
     finalMessage = []
-    used = 0
+    used = 0 # for the index of the pad
     for i in message:
         i_index = message.index(i)
         i_num = ord(i)
+
+        # when the i is a letter, shift the letter depending on what the pad letter at that index
         if ((i_num>=65) and (i_num<=90)) or ((i_num>=97) and (i_num<=122)):
             finalMessage.append(shiftLetter(i, ord(pad[used]) - 65))
             used += 1
+        # when the i is not a letter, it is not shifted and the index for the pad does not change
         else:
             finalMessage.append(i)
             used = used
@@ -68,16 +73,28 @@ def decipher(messagef, padf):
     for i in message:
         i_index = message.index(i)
         i_num = ord(i)
+
+        # when the i is a letter, shift the letter depending on what the pad letter at that index
         if ((i_num>=65) and (i_num<=90)) or ((i_num>=97) and (i_num<=122)):
             finalMessage.append(shiftLetter(i, -(ord(pad[used]) - 65)))
             used += 1
+        
+        # when the i is not a letter, it is not shifted and the index for the pad does not change
         else:
             finalMessage.append(i)
             used = used
     print("".join(finalMessage))
 
+def main(): 
+    choice = input("Would you like to encipher or decipher the code?: ")
+    if choice == "Encipher" or choice == "encipher":
+        encipher(messagef = input("Message: "), padf = input("Pad: "))
+    elif choice == "Decipher" or choice == "decipher":
+        decipher(messagef = input("Message: "), padf = input("Pad: "))
+    else: print("Invalid response. Please try again.")
 
-decipher(messagef = input("Message: "), padf = input("Pad: "))
+if __name__ == "__main__":
+    main()
 
         
 
