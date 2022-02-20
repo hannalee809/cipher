@@ -1,14 +1,12 @@
 import random
 import string
 
-# generatePad function 
+# generatePad function and put into file
 def generatePad(file_name, pad_length):
     letters = string.ascii_uppercase
     f = open(file_name, "x")
     f.write(''.join(random.choice(letters) for i in range(int(pad_length))))
     f.close()
-
-    # put into a file
 
 
 # Shift a letter by the designated amount, regardless of case
@@ -41,14 +39,22 @@ def shiftMessage(message,pad):
     for message_letter, pad_number in zip(message, pad):
         print("".join[shiftLetter] )
         
-
-def encipher(messagef,padf):
-    # opens and reads the files of pad and message
+def encipher(messagef, padf):
+     # opens and reads the files of pad and message
     f = open(padf)
     pad = f.read()
     m = open(messagef)
     message = m.read()
+    print(encipherShift(message, pad))
 
+def decipher(messagef, padf):
+    f = open(padf)
+    pad = f.read()
+    m = open(messagef)
+    message = m.read()
+    print(decipherShift(message, pad))
+
+def encipherShift(message,pad):
     finalMessage = []
     used = 0 # for the index of the pad
     for i in message:
@@ -63,13 +69,9 @@ def encipher(messagef,padf):
         else:
             finalMessage.append(i)
             used = used
-    print("".join(finalMessage))
+    return "".join(finalMessage)
         
-def decipher(messagef, padf):
-    f = open(padf)
-    pad = f.read()
-    m = open(messagef)
-    message = m.read()
+def decipherShift(message, pad):
     finalMessage = []
     used = 0
     for i in message:
@@ -85,7 +87,7 @@ def decipher(messagef, padf):
         else:
             finalMessage.append(i)
             used = used
-    print("".join(finalMessage))
+    return "".join(finalMessage)
 
 def main(): 
     choice = input("Would you like to encipher or decipher the code, or generate a pad file?: ")
